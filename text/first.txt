@@ -1,0 +1,79 @@
+1. 컴포넌트 
+
+  1) 컴포넌트 만들기 (* 함수형 컴포넌트)
+
+      - 컴포넌트 만드는 단축키: rafce (reactArrowFunctionExportComponent)
+      - 단축키가 안나올 경우 설치해야하는 extention: ES7 + React/Redux/React-Native snippets
+      - 컴포넌트 만들때 주의사항
+          : 컴포넌트 이름은 반드시 대문자로 시작해야한다.
+            리액트가 컴포넌트와 일반 HTML 태그를 구분하는 방법은 태그가 대문자로 시작하는지
+            여부이다. 따라서 소문자로 시작을 하면 일반 HTML 태그로 분류하므로 에러를 일으킴
+
+  2) 어떤것을 컴포넌트로 만들어야 할까?
+    
+      - 반복이 되는 부분
+          리스트의 아이템이라던가 반복이 되는 UI 요소는 컴포넌트로 만드는게 좋음
+      - 기능별로
+          기능별로 나누어 개발할때나 테스트, 유지보수할때 훨씬 더 용이하다
+      - 하나에 한 기능만
+          나중에 재활용 될 경우를 대비해 한 컴포넌트에 한 기능만 들어있는 것이 좋음
+
+2. props (객체)
+
+   props는 컴포넌트에 전달되는 인수 (props를 통해 컴포넌트에 값을 전달할 수 있다)
+   props는 객체 형태로 전달
+   
+   ex) 
+       * Car.js
+
+         import React from 'react';
+
+         function Car(props) {
+           return <div>브랜드: {props.brand} 번호: {props.num}</div>
+         }
+
+         export default Hello;
+        
+       * App.js
+
+         import React from 'react';
+         import Car from './Car';
+
+         function App() {
+           return (
+             <Car brand = "benz" num = "00누 0000" />
+           );
+         }
+
+          export default App;
+
+3. State
+
+   리액트는 State에 반응, 즉 값(상태)가 바뀌면 UI도 자동으로 그려준다
+   State가 바뀌면 리랜더링
+
+   ex) 
+      * App.js
+
+        import {useState} from "react"
+        import React from 'react'
+
+        const App = () => {
+
+          const [counter, setCounter] = useState(0);
+          const increase = () => {
+            setCounter(counter + 1)
+          }
+
+          return (
+            <div>
+              <div>{counter}</div>
+              <button onClick = {increase}>클릭!</button>
+            </div>
+          )
+        }
+
+        export default app
+
+   - 변수는 동기적으로 작동, state는 비동기적으로 작동
+   - setCounter() 함수는 비동기적으로 실행, 즉 increase() 함수가 끝난 후 실행
